@@ -1,0 +1,19 @@
+---
+# tasks file for ufw
+- name: print os
+  debug:
+    var: ansible_distribution
+- include_tasks: ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+- include_tasks: arch.yml
+  when: ansible_distribution == "Archlinux"
+
+- name: "ufw add ssh in rule"
+  ufw:
+    rule: allow
+    direction: in
+    src: "{{ ufw_in_ssh_ip }}"
+    to_port: 22
+- name: "ufw enable"
+  ufw:
+    state: enabled

@@ -1,0 +1,5 @@
+---
+- name: "Install ufw"
+  pacman:
+    name: ufw
+    state: present
