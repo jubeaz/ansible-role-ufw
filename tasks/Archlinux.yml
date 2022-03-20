@@ -4,5 +4,4 @@
     name: ufw
     state: present
   register: __pacman
-  changed_when: __pacman.packages is defined
-
+  changed_when: (__pacman.packages | default([]))| length >0 
